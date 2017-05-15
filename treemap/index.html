@@ -1,0 +1,49 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script src="d3.js"></script>
+<script src="custom-d3plus.js"></script>
+
+<div>
+    <span id="viz" ></span>
+</div>
+
+<script>
+  var sample_data = [
+    {"value": 10, "levelOne": "levelOne 1", "levelZero": "levelZero 01"},
+    {"value": 70, "levelOne": "levelOne 2", "levelZero": "levelZero 01"},
+    {"value": 40, "levelOne": "levelOne 3", "levelZero": "levelZero 01"},
+    {"value": 15, "levelOne": "levelOne 4", "levelZero": "levelZero 02"},
+    {"value": 5, "levelOne": "levelOne 5", "levelZero": "levelZero 02"},
+    {"value": 49, "levelOne": "levelOne 6", "levelZero": "levelZero 02"},
+    {"value": 5, "levelTwo":"levelTwo 01","levelOne": "levelOne 5", "levelZero": "levelZero 02"},
+    {"value": 49,"levelTwo":"levelTwo 02", "levelOne": "levelOne 6", "levelZero": "levelZero 02"},
+    {"value": 49,"levelTwo":"levelTwo 03", "levelOne": "levelOne 1", "levelZero": "levelZero 02"}
+  ]
+
+
+
+    d3plus.viz()
+    .container("#viz")
+    .data(sample_data)
+    .type("tree_map")
+    .id(["levelZero","levelOne","levelTwo"])
+    .size("value")
+    // .color(function(obj){
+    //     console.log(obj);
+    //     return "#aa";
+    // } )
+    .draw()  
+
+    function callbackWhenLeaf(id){
+        // Here we can do anything with the data
+        console.log("Operation");
+    }
+
+    function leafnodeOperation(id, callbackWhenLeaf){
+        alert(id);
+        if(typeof callbackWhenLeaf == "function") 
+            callbackWhenLeaf(id);
+    }
+
+</script>
